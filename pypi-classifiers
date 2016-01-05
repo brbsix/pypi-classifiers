@@ -99,50 +99,55 @@ UI = """\
 """
 
 
-def reset_model():
-    model = builder.get_object('classifiers_store')
+class Main:
 
-    model.clear()
+    def __init__(self):
+        self.builder = Gtk.Builder()
+        self.builder.add_from_string(UI)
 
-    # load data
-    url = r'http://pypi.python.org/pypi?%3Aaction=list_classifiers'
-    resp = requests.get(url)
-    resp.raise_for_status()
+        # load data
+        self.reset_model()
 
-    for line in resp.text.splitlines():
-        model.append((False, line.strip()))
+        # set up GUI
+        mw = self.builder.get_object('main_window')
+        mw.connect('delete-event', lambda a, b: Gtk.main_quit())
+        self.builder.get_object('renderer_active').connect('toggled', self.on_cell_toggle)
+        GLib.set_application_name('PyPI classifiers selector')
+        mw.show()
+        Gtk.main()
 
+    def on_cell_toggle(self, renderer, path):
+        model = self.builder.get_object('classifiers_store')
 
-def on_cell_toggle(renderer, path):
-    model = builder.get_object('classifiers_store')
-    i = model.get_iter(path)
+        i = model.get_iter(path)
 
-    # flip column 0, the "active" column
-    model.set_value(i, 0, not model.get_value(i, 0))
+        # flip column 0, the "active" column
+        model.set_value(i, 0, not model.get_value(i, 0))
 
-    # update tree view
-    chunks = ['classifiers=[']
-    i = model.get_iter_first()
-    while i is not None:
-        if model.get_value(i, 0) is True:
-            chunks.append("    '%s'," % model.get_value(i, 1))
-        i = model.iter_next(i)
-    chunks.append(']')
+        # update tree view
+        chunks = ['classifiers=[']
+        i = model.get_iter_first()
+        while i is not None:
+            if model.get_value(i, 0) is True:
+                chunks.append("    '%s'," % model.get_value(i, 1))
+            i = model.iter_next(i)
+        chunks.append(']')
 
-    builder.get_object('output').get_buffer().set_text('\n'.join(chunks))
+        self.builder.get_object('output').get_buffer().set_text('\n'.join(chunks))
+
+    def reset_model(self):
+        model = self.builder.get_object('classifiers_store')
+
+        model.clear()
+
+        # load data
+        url = r'http://pypi.python.org/pypi?%3Aaction=list_classifiers'
+        resp = requests.get(url)
+        resp.raise_for_status()
+
+        for line in resp.text.splitlines():
+            model.append((False, line.strip()))
 
 
 if '__main__' == __name__:
-    builder = Gtk.Builder()
-    builder.add_from_string(UI)
-
-    # load data
-    reset_model()
-
-    # set up GUI
-    mw = builder.get_object('main_window')
-    mw.connect('delete-event', lambda a, b: Gtk.main_quit())
-    builder.get_object('renderer_active').connect('toggled', on_cell_toggle)
-    GLib.set_application_name('PyPI classifiers selector 0.1')
-    mw.show()
-    Gtk.main()
+    Main()
