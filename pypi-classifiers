@@ -149,5 +149,5 @@ class Main:
             model.append((False, line.strip()))
 
 
-if '__main__' == __name__:
+if __name__ == '__main__':
     Main()
