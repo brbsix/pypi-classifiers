@@ -14,7 +14,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 setup(
     name='pypi-classifiers',
-    version='0.3.dev1',
+    version='0.4',
     description='Use a GUI to select PyPI classifiers '
                 'and include them in a setup.py',
     long_description=read('README.rst'),
