@@ -18,7 +18,6 @@ setup(
     description='Use a GUI to select PyPI classifiers '
                 'and include them in a setup.py',
     long_description=read('README.rst'),
-    keywords='pypi setup.py classifiers programming',
     author='Marc Brinkmann',
     author_email='git@marcbrinkmann.de',
     url='http://github.com/mbr/pypi-classifiers',
@@ -42,4 +41,5 @@ setup(
         'Topic :: Software Development',
         'Topic :: Utilities',
     ],
+    keywords='pypi setup.py classifiers programming'
 )
