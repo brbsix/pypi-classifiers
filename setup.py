@@ -5,9 +5,12 @@ import os
 from setuptools import setup
 
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+def read(filename):
+    with open(filename) as f:
+        return f.read()
 
+# allow setup.py to be run from any path
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 setup(name='pypi-classifiers',
       version='0.3.dev1',
