@@ -3,6 +3,7 @@
 
 """Use a GUI to select PyPI classifiers and include them in a setup.py"""
 
+import re
 from gi.repository import Gtk, GLib
 import requests
 
@@ -133,6 +134,9 @@ class Main:
                 chunks.append("    '%s'," % self.model.get_value(i, 1))
             i = self.model.iter_next(i)
         chunks.append(']')
+
+        # remove comma from last classifier (2nd to last item in actual list)
+        chunks[-2] = re.sub(',$', '', chunks[-2])
 
         self.builder.get_object(
             'output').get_buffer().set_text('\n'.join(chunks))
