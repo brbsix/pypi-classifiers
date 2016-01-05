@@ -46,7 +46,7 @@ UI = """\
                 </child>
                 <child>
                   <object class="GtkTreeViewColumn" id="Classifiers">
-                    <property name="title">column</property>
+                    <property name="title">Column</property>
                     <property name="clickable">True</property>
                     <property name="sort_column_id">1</property>
                     <child>
