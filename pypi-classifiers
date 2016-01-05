@@ -133,7 +133,7 @@ class Main:
         chunks = ['classifiers=[']
         i = self.model.get_iter_first()
         while i is not None:
-            if self.model.get_value(i, 0) is True:
+            if self.model.get_value(i, 0):
                 chunks.append("    '%s'," % self.model.get_value(i, 1))
             i = self.model.iter_next(i)
         chunks.append(']')
