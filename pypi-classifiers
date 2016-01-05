@@ -146,7 +146,7 @@ class Main:
         resp.raise_for_status()
 
         for line in resp.text.splitlines():
-            model.append((False, line.strip()))
+            model.append((False, line))
 
 
 if __name__ == '__main__':
