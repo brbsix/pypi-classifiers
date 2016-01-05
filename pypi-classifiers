@@ -141,7 +141,7 @@ class Main:
         model.clear()
 
         # load data
-        url = r'http://pypi.python.org/pypi?%3Aaction=list_classifiers'
+        url = 'http://pypi.python.org/pypi?%3Aaction=list_classifiers'
         resp = requests.get(url)
         resp.raise_for_status()
 
