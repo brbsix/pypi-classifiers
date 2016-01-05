@@ -109,11 +109,11 @@ class Main:
         self.reset_model()
 
         # set up GUI
-        mw = self.builder.get_object('main_window')
-        mw.connect('delete-event', lambda a, b: Gtk.main_quit())
+        main_window = self.builder.get_object('main_window')
+        main_window.connect('delete-event', lambda a, b: Gtk.main_quit())
         self.builder.get_object('renderer_active').connect('toggled', self.on_cell_toggle)
         GLib.set_application_name('PyPI classifiers selector')
-        mw.show()
+        main_window.show()
         Gtk.main()
 
     def on_cell_toggle(self, renderer, path):
