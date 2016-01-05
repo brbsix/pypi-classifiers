@@ -6,7 +6,8 @@
 from gi.repository import Gtk, GLib
 import requests
 
-UI = """<?xml version="1.0"?>
+UI = """\
+<?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
