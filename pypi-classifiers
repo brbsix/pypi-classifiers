@@ -111,7 +111,8 @@ class Main:
         # set up GUI
         main_window = self.builder.get_object('main_window')
         main_window.connect('delete-event', lambda a, b: Gtk.main_quit())
-        self.builder.get_object('renderer_active').connect('toggled', self.on_cell_toggle)
+        self.builder.get_object(
+            'renderer_active').connect('toggled', self.on_cell_toggle)
         GLib.set_application_name('PyPI classifiers selector')
         main_window.show()
         Gtk.main()
@@ -133,7 +134,8 @@ class Main:
             i = model.iter_next(i)
         chunks.append(']')
 
-        self.builder.get_object('output').get_buffer().set_text('\n'.join(chunks))
+        self.builder.get_object(
+            'output').get_buffer().set_text('\n'.join(chunks))
 
     def reset_model(self):
         model = self.builder.get_object('classifiers_store')
